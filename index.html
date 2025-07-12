@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yan Naing Kyaw Tint | AI & Robotics Engineer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --header-bg: #1f2937;
+      --header-text: #ffffff;
+      --footer-bg: #1f2937;
+      --footer-text: #ffffff;
+      --transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] {
+      --primary: #60a5fa;
+      --primary-dark: #3b82f6;
+      --text: #e5e7eb;
+      --text-light: #9ca3af;
+      --bg: #111827;
+      --card-bg: #1f2937;
+      --header-bg: #111827;
+      --header-text: #f3f4f6;
+      --footer-bg: #111827;
+      --footer-text: #f3f4f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: var(--transition);
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 3rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .header-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 75% 50%, rgba(59, 130, 246, 0.1), transparent 70%);
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    nav a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--primary-dark);
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section {
+      padding: 3rem 1rem;
+      max-width: 900px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .project {
+      background: var(--card-bg);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .project h3 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .project p {
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .project-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: var(--transition);
+    }
+
+    .project-links a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .achievement-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .achievement-item {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: var(--transition);
+    }
+
+    .achievement-item:hover {
+      transform: translateX(5px);
+    }
+
+    .achievement-icon {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .skill-category h3 {
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .skill-category ul {
+      list-style: none;
+    }
+
+    .skill-category li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .skill-category li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .contact-link:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      position: relative;
+    }
+
+    .footer-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .social-link {
+      color: var(--footer-text);
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .theme-toggle:hover {
+      background: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+      transition: var(--transition);
+      opacity: 0;
+      visibility: hidden;
+      border: none;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .tagline {
+        font-size: 1rem;
+      }
+      
+      nav ul {
+        gap: 0.5rem;
+      }
+      
+      section {
+        padding: 2rem 1rem;
+      }
+      
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .skills-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .theme-toggle, .back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 1rem;
+        right: 1rem;
+      }
+      
+      .back-to-top {
+        bottom: 4.5rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-bg"></div>
+    <div class="header-content">
+      <h1 class="floating">Yan Naing Kyaw Tint</h1>
+      <p class="tagline">AI & Robotics Engineer | Embedded Systems Developer | Python & STM32</p>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a Mechatronics and Computer Science student passionate about Robotics, AI, and Automation. With handson experience in robotics, machine vision, and AI-driven solutions, I have developed projects ranging from humanoid robots to AI-powered waste sorting systems. I have represented Myanmar in the JENESYS 2024 ASEAN-Japan Conference, led my team to 1st place at HackAtom, and developed impactful solutions in international hackathons. My goal is to create intelligent systems that bridge the gap between humans and technology, fostering sustainable and interconnected communities.
+    </p>
+    <p>INTJ-A | Resilient | Purpose-driven</p>
+    <div class="contact-links" style="margin-top: 1.5rem;">
+      <a href="C:\Users\ASUS\Documents\MyPortfolio\Yan Naing Kyaw Tint CV (Europass).pdf" download class="contact-link pulse">
+        <i class="fas fa-download"></i> Download CV
+      </a>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="ai">AI</button>
+      <button class="filter-btn" data-filter="embedded">Embedded</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="Python">Python</button>
+    </div>
+    
+    <div class="project-grid">
+      <div class="project" data-category="embedded">
+        <h3>Color Dispensing Control Panel</h3>
+        <p>Python GUI with real-time STM32 hardware integration for pump-based color dispensing and inventory management.</p>
+        <div class="project-links">
+          <a href="https://github.com/robinglory/PythonGUI_STM32_WaterDispensing" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="project" data-category="embedded">
+        <h3>STM32 Water Dispense Controller</h3>
+        <p>Embedded C++ firmware for 9-pump STM32 system with real-time calibration, flash storage, and serial command interface.</p>
+        <div class="project-links">
+          <a href="https://github.com/robinglory/stm32-water-dispense-controller" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="project" data-category="embedded">
+        <h3>WED Hackathon Project 2025</h3>
+        <p>EcoHarvest is an innovative smart farming solution designed to empower small-scale farmers to adapt to climate change. By integrating mechatronics, web technologies, and sustainable design, we aim to address key agricultural challenges such as water scarcity, pest management, and energy efficiency. This project was developed as part of the World Engineering Day Hackathon 2025.</p>
+        <div class="project-links">
+          <a href="https://github.com/robinglory/World-Engineering-Day-Hackathon-2025-Team-EcoHarvest-" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="project" data-category="ai">
+        <h3>AI for Everyone (Learning Journal)</h3>
+        <p>Gesture and pose recognition projects using OpenCV, Python, and Mediapipe — based on Paul McWhorter's AI series.</p>
+        <div class="project-links">
+          <a href="https://github.com/robinglory/AI_for_Everyone" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="project" data-category="embedded">
+        <h3>Automated-Garment-Sorting-Robot-Arm-System</h3>
+        <p>An automated garment sorting system using a robotic arm with color detection. The system identifies colored garments via TCS3200 color sensor, classifies them, and sorts into designated bins using a 5-DOF robotic arm. Includes conveyor belt automation with IR sensors for object positioning.</p>
+        <div class="project-links">
+          <a href="https://github.com/robinglory/Automated-Garment-Sorting-Robot-Arm-System" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      
+      <div class="project" data-category="Python">
+        <h3>CS50 Python Course</h3>
+        <p>Pure Python Core Concepts by CS50!</p>
+        <div class="project-links">
+          <a href="https://github.com/robinglory/LearningCS50Python" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+
+
+      <div class="project" data-category="web">
+        <h3>Photo_X Website</h3>
+        <p>Responsive photo gallery using HTML, CSS, Bootstrap, JS and jQuery.</p>
+        <div class="project-links">
+          <a href="https://robinglory.github.io/Photo_X/" target="_blank">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="https://github.com/robinglory/Photo_X" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="project" data-category="web">
+        <h3>Simple Recipe Website</h3>
+        <p>Responsive recipe website using HTML, CSS, Bootstrap, JS and jQuery.</p>
+        <div class="project-links">
+          <a href="https://robinglory.github.io/Simple-Recipes-HTML-CSS/" target="_blank">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="https://github.com/robinglory/Simple-Recipes-HTML-CSS" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="project" data-category="web">
+        <h3>Tindog</h3>
+        <p>Responsive dog dating website using HTML, CSS, Bootstrap, JS and jQuery.</p>
+        <div class="project-links">
+          <a href="https://robinglory.github.io/tindog//" target="_blank">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="https://github.com/robinglory/tindog" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="project" data-category="web">
+        <h3>Only_Bootstrap_Website</h3>
+        <p>This Website is built by only using Bootstrap. I don't use Css and Java Script for this Website. I wanted to see what only bootstrap can do in creating Website. I can see that Bootstrap is pretty powerful platfrom.</p>
+        <div class="project-links">
+          <a href="https://robinglory.github.io/Only_Bootstrap_Website/" target="_blank">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="https://github.com/robinglory/Only_Bootstrap_Website" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      <div class="project" data-category="web">
+        <h3>Admin_Dashboard-Bootstrap</h3>
+        <p>ဒါက အင်မင်ထိန်းချုပ်ခုံကို Bootstrap ပဲသုံးပြီး တည်ဆောက်ထားတာပါ။ မြန်မာ Website တစ်ခုအနေနဲ့ တည်ဆောက်ထားပါတယ်။</p>
+        <div class="project-links">
+          <a href="https://robinglory.github.io/Admin_Dashboard-Bootstrap/" target="_blank">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="https://github.com/robinglory/Admin_Dashboard-Bootstrap" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+      
+      <!-- Additional project example -->
+      <div class="project" data-category="ai">
+        <h3>Automated Waste Sorting System</h3>
+        <p>Computer vision system for automated waste classification and sorting using TensorFlow and robotic actuators.</p>
+        <div class="project-links">
+          <a href="#" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <h2>Achievements</h2>
+    <div class="achievement-list">
+      <div class="achievement-item">
+        <div class="achievement-icon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div>
+          <h3>1st Prize – HackAtom 2024 (ROSATOM)</h3>
+          <p>Won first place in an international hackathon for innovative atomic technology solutions.</p>
+        </div>
+      </div>
+         
+      <div class="achievement-item">
+        <div class="achievement-icon">
+          <i class="fas fa-globe-asia"></i>
+        </div>
+        <div>
+          <h3>JENESYS 2024 Delegate to Japan</h3>
+          <p>Represented my country in a youth exchange program focused on technology and innovation.</p>
+        </div>
+      </div>
+      
+      <div class="achievement-item">
+        <div class="achievement-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div>
+          <h3>AAET Engineering Showcase – Robotic Garment Sorting System</h3>
+          <p>Featured project at the annual engineering exhibition demonstrating AI-powered automation.</p>
+        </div>
+      </div>
+      <div class="achievement-item">
+      <div class="achievement-icon">
+        <i class="fas fa-seedling"></i>
+      </div>
+      <div>
+        <h3>WED Engineering Day Hackathon – Smart Farming System</h3>
+        <p>Designed and prototyped a smart farming solution using sensors and automation (non-prize).</p>
+      </div>
+    </div>
+
+    <div class="achievement-item">
+      <div class="achievement-icon">
+        <i class="fas fa-recycle"></i>
+      </div>
+      <div>
+        <h3>Myanmar 100-Year Engineering Hackathon – Robotic Waste Sorter</h3>
+        <p>Developed an AI-powered robotic waste sorter with 92–95% accuracy and accompanying web platform.</p>
+      </div>
+    </div>
+
+    <div class="achievement-item">
+      <div class="achievement-icon">
+        <i class="fas fa-user-cog"></i>
+      </div>
+      <div>
+        <h3>Final Year Thesis – AI-Driven Robotic Head</h3>
+        <p>Developed an intelligent robotic head for language learning with eye/lip movement, speech interaction, and camera vision.</p>
+      </div>
+    </div>
+
+    <div class="achievement-item">
+      <div class="achievement-icon">
+        <i class="fas fa-microchip"></i>
+      </div>
+      <div>
+        <h3>Industrial Project – STM32 Color Dispensing System</h3>
+        <p>Built and deployed a full-scale industrial color dispensing solution integrating STM32 firmware, Python GUI, and MySQL.</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-container">
+      <div class="skill-category">
+        <h3>Languages</h3>
+        <ul>
+          <li>Python</li>
+          <li>C/C++</li>
+          <li>HTML/CSS/JS</li>
+          <li>SQL</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h3>Embedded Systems</h3>
+        <ul>
+          <li>STM32</li>
+          <li>Arduino</li>
+          <li>PCA9685</li>
+          <li>RTOS</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h3>AI & Frameworks</h3>
+        <ul>
+          <li>PyTorch</li>
+          <li>OpenCV</li>
+          <li>TensorFlow</li>
+          <li>Mediapipe</li>
+        </ul>
+      </div>
+      
+      <div class="skill-category">
+        <h3>Tools & Platforms</h3>
+        <ul>
+          <li>Git</li>
+          <li>VS Code</li>
+          <li>PlatformIO</li>
+          <li>Figma</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Let's connect and collaborate on innovative projects!</p>
+    <div class="contact-links">
+      <a href="mailto:koyannaingkyawtint@gmail.com" class="contact-link">
+        <i class="fas fa-envelope"></i> Email
+      </a>
+      <a href="https://github.com/robinglory" target="_blank" class="contact-link">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/koyannaingkyawtint/" target="_blank" class="contact-link">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="https://x.com/RobinGloryYN" target="_blank" class="contact-link">
+        <i class="fab fa-twitter"></i> Twitter
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="https://github.com/robinglory" target="_blank" class="social-link">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/koyannaingkyawtint/" target="_blank" class="social-link">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://x.com/RobinGloryYN" target="_blank" class="social-link">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="mailto:koyannaingkyawtint@gmail.com" class="social-link">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+      <p>&copy; 2025 Yan Naing Kyaw Tint. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <button class="theme-toggle" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // Dark mode toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const moonIcon = themeToggle.querySelector('i');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Check for saved theme or preferred scheme
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+      document.body.setAttribute('data-theme', 'dark');
+      moonIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      if (document.body.getAttribute('data-theme') === 'dark') {
+        document.body.removeAttribute('data-theme');
+        moonIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        moonIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+    
+    // Project filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('.project');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        const filter = button.dataset.filter;
+        
+        // Filter projects
+        projects.forEach(project => {
+          if (filter === 'all' || project.dataset.category === filter) {
+            project.style.display = 'block';
+          } else {
+            project.style.display = 'none';
+          }
+        });
+      });
+    });
+    
+    // Scroll animations
+    const sections = document.querySelectorAll('section');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+    
+    // Back to top button
+    const backToTopButton = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
